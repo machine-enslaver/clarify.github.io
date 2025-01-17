@@ -2,14 +2,14 @@
 async function fetchCredentials() {
   const response = await fetch('credentials.csv');
   const text = await response.text();
-  const rows = text.split('\n');
-  const headers = rows[0].split(',');
+  const rows = text.split('\n').filter(row => row.trim() !== ''); // Remove empty rows
+  const headers = rows[0].split('\t').map(header => header.trim()); // Use tab as separator for your file
 
   // Convert CSV rows to objects
   const credentials = rows.slice(1).map((row) => {
-    const values = row.split(',');
+    const values = row.split('\t').map(value => value.trim()); // Split by tab and trim values
     return headers.reduce((acc, header, index) => {
-      acc[header.trim()] = values[index]?.trim();
+      acc[header] = values[index] || ''; // Handle missing values
       return acc;
     }, {});
   });
