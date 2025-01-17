@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Improved Text Box</title>
+  <title>Login Page</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="theme-toggle">
-    <label>
-      <input type="checkbox" id="themeSwitcher">
-      <span>Dark Theme</span>
-    </label>
-  </div>
   <div class="container">
-    <label for="textbox" class="textbox-label">Enter Text:</label>
-    <input type="text" id="textbox" class="textbox" placeholder="Type something...">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" class="textbox" placeholder="Enter your email" required>
+      <input type="password" id="password" class="textbox" placeholder="Enter your password" required>
+      <button type="submit" class="submit-button">Login</button>
+      <p id="error-message" class="error-message"></p>
+    </form>
   </div>
 
   <script src="script.js"></script>
