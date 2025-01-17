@@ -1,17 +1,17 @@
-// Fetch and parse the CSV file
+// Fetch and parse the CSV file (without headers)
 async function fetchCredentials() {
   const response = await fetch('credentials.csv');
   const text = await response.text();
   const rows = text.split('\n').filter(row => row.trim() !== ''); // Remove empty rows
-  const headers = rows[0].split('\t').map(header => header.trim()); // Use tab as separator for your file
 
-  // Convert CSV rows to objects
-  const credentials = rows.slice(1).map((row) => {
+  // Convert CSV rows to objects (assume columns are in order: name, email, password)
+  const credentials = rows.map((row) => {
     const values = row.split('\t').map(value => value.trim()); // Split by tab and trim values
-    return headers.reduce((acc, header, index) => {
-      acc[header] = values[index] || ''; // Handle missing values
-      return acc;
-    }, {});
+    return {
+      name: values[0] || '',
+      email: values[1] || '',
+      password: values[2] || ''
+    };
   });
 
   return credentials;
